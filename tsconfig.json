@@ -1,13 +1,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "declaration": true,
+    "declaration": false,
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "lib",
-    "sourceMap": true,
+    "sourceMap": false,
     "moduleResolution": "node",
     "noEmitOnError": true,
     "jsx": "react"
