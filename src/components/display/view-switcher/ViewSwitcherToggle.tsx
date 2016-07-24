@@ -13,9 +13,9 @@ import {Toggle, ListProps} from "../../ui"
 
 const defaults = require("lodash/defaults")
 
-
 export interface ViewSwitcherProps extends SearchkitComponentProps {
 	listComponent?:RenderComponentType<ListProps>
+  switchView?:any
 }
 
 export class ViewSwitcherToggle extends SearchkitComponent<ViewSwitcherProps, any> {
@@ -34,6 +34,7 @@ export class ViewSwitcherToggle extends SearchkitComponent<ViewSwitcherProps, an
 
   setView(view){
     this.getViewOptionsSwitcherAccessor().setView(view)
+    this.props.switchView(view.key)
   }
 
   render() {

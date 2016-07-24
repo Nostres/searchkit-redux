@@ -21,3 +21,5 @@
 /// <reference path="main/ambient/selenium-webdriver/selenium-webdriver.d.ts" />
 /// <reference path="main/ambient/sinon/sinon.d.ts" />
 /// <reference path="main/ambient/typescript/typescript.d.ts" />
+/// <reference path="globals/react-redux/index.d.ts" />
+/// <reference path="modules/redux-immutable/index.d.ts" />
