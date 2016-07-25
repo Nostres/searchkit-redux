@@ -88,6 +88,8 @@ export interface HitsProps extends SearchkitComponentProps{
 	itemComponent?:ReactComponentType<HitItemProps>
 	listComponent?:ReactComponentType<HitsListProps>
 	scrollTo?: boolean|string
+  updateDisplayed?: Function
+  updateQuery?: Function
 }
 
 
@@ -105,7 +107,7 @@ export class Hits extends SearchkitComponent<HitsProps, any> {
 			React.PropTypes.bool
 		]),
 		itemComponent:RenderComponentPropType,
-		listComponent:RenderComponentPropType
+		listComponent:RenderComponentPropType,
 	}, SearchkitComponent.propTypes)
 
 	static defaultProps = {
@@ -134,6 +136,10 @@ export class Hits extends SearchkitComponent<HitsProps, any> {
 
 	render() {
 		let hits:Array<Object> = this.getHits()
+
+    this.props.updateDisplayed(hits)
+    this.props.updateQuery(this.searchkit.query)
+
 		let hasHits = hits.length > 0
 
 		if (!this.isInitialLoading() && hasHits) {

@@ -1,3 +1,39 @@
+## SearchKit-Redux
+This is a forked Searckit@v0.10.0 with Redux and Immutable.js
+This version has some Redux capabilities and allows anyone to import a "SearchKitReducer" and in return add to your store's state tree the following structure:
+```json
+{
+  viewSwitcher: {
+    currentView: 'table',
+  },
+  items: {
+    displayed: [{}, {}, {}],
+    query: {},
+  }
+}
+```
+
+### Adding the SearchKitReducer to your store
+```javascript
+import { combineReducers } from 'redux-immutable'
+import * as SearchKit from 'searchkit' // eslint-disable-line
+
+const YourReducer = combineReducers({
+  filter: SearchKitReducer,
+  more: () => {},
+})
+
+export default YourReducer
+
+```
+
+### Using the ViewSwitcher with Redux mappings
+just import ViewSwitcherToggleContainer instead of ViewSwitcherToggle
+
+```javascript
+import { ViewSwitcherToggleContainer } from 'searchkit'
+```
+
 ## What is Searchkit?
 Searchkit is a suite of UI components built in react. The aim is to rapidly create beautiful search applications using declarative components, and without being an ElasticSearch expert.
 

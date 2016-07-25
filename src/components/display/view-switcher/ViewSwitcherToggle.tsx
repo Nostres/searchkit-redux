@@ -34,7 +34,7 @@ export class ViewSwitcherToggle extends SearchkitComponent<ViewSwitcherProps, an
 
   setView(view){
     this.getViewOptionsSwitcherAccessor().setView(view)
-    this.props.switchView(view.key)
+    this.props.switchView(view)
   }
 
   render() {
@@ -42,6 +42,9 @@ export class ViewSwitcherToggle extends SearchkitComponent<ViewSwitcherProps, an
     if(viewOptionsAccessor){
       let options = viewOptionsAccessor.options
       let selectedOption = viewOptionsAccessor.getSelectedOption().key
+
+      this.props.switchView(selectedOption)
+
 			return renderComponent(this.props.listComponent, {
 				mod:this.props.mod,
 				className:this.props.className,
