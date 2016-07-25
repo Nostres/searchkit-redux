@@ -3,12 +3,12 @@ This is a forked Searckit@v0.10.0 with Redux and Immutable.js
 This version has some Redux capabilities and allows anyone to import a "SearchKitReducer" and in return add to your store's state tree the following structure:
 ```json
 {
-  viewSwitcher: {
-    currentView: 'table',
+  "viewSwitcher": {
+    "currentView": "table",
   },
-  items: {
-    displayed: [{}, {}, {}],
-    query: {},
+  "items": {
+    "displayed": [{}, {}, {}],
+    "query": {},
   }
 }
 ```
