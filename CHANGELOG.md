@@ -1,3 +1,6 @@
+## 0.10.2 (16th August, 2016)
+-- updated the README.md to fix a wrong json structure
+
 ## 0.10.1 (16th August, 2016)
 - reverted to the previous 'qs' package version
 - added ability to have highlighted fields options

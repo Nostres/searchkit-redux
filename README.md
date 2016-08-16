@@ -48,18 +48,16 @@ you will have to pass an Array of Objects, exactly like elasticsearch likes it.
 
 ```javascript
 <Hits            
-  highlightFields={[
-    {
-      title: {
-        number_of_fragments : 0,
+  highlightFields={{
+    fields: {
+      'title': {
+        number_of_fragments: 0,
       },
-    }, {
-      body: { 
-        number_of_fragments : 3,
-        fragment_size: 150,
+      'result.domain': {
+        number_of_fragments: 0,
       },
-    }
-  ]}
+    },
+  }}
 >
 ```
 
