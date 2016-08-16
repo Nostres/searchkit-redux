@@ -28,11 +28,42 @@ export default YourReducer
 ```
 
 ### Using the ViewSwitcher with Redux mappings
-just import ViewSwitcherToggleContainer instead of ViewSwitcherToggle
+Just import ViewSwitcherToggleContainer instead of ViewSwitcherToggle
 
 ```javascript
 import { ViewSwitcherToggleContainer } from 'searchkit'
 ```
+
+## Breaking Changes
+From now on when you use the property 'highlightFields'
+instead of passing an Array of Strings:
+
+```javascript
+<Hits            
+  highlightFields={['title', 'body']}
+>
+```
+
+you will have to pass an Array of Objects, exactly like elasticsearch likes it.
+
+```javascript
+<Hits            
+  highlightFields={[
+    {
+      title: {
+        number_of_fragments : 0,
+      },
+    }, {
+      body: { 
+        number_of_fragments : 3,
+        fragment_size: 150,
+      },
+    }
+  ]}
+>
+```
+
+This will allow you to pass highlighting options per field.
 
 ## What is Searchkit?
 Searchkit is a suite of UI components built in react. The aim is to rapidly create beautiful search applications using declarative components, and without being an ElasticSearch expert.

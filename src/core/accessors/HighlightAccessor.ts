@@ -9,17 +9,9 @@ export class HighlightAccessor extends Accessor {
   highlightFields:any
   constructor(public fields:Array<string>){
     super()
-    this.highlightFields = this.computeHighlightedFields(fields)
+    this.highlightFields = fields
   }
 
-  computeHighlightedFields(fields) {
-    return {
-      fields:mapValues(
-        zipObject(fields),
-        constant({})
-      )
-    }
-  }
   buildOwnQuery(query){
     return query.setHighlight(this.highlightFields)
   }

@@ -1,3 +1,7 @@
+## 0.10.1 (16th August, 2016)
+- reverted to the previous 'qs' package version
+- added ability to have highlighted fields options
+
 ## 0.10.0 (4th June, 2016)
 - `SearchkitManager` is more intelligent with reregistering url listeners
 - `RefinementListFilter`, `MenuFilter`, `NumericRefinementListFilter` and `RangeFilter` now supports `fieldOptions` for `nested`/`child` fields
