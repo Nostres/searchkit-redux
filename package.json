@@ -1,6 +1,6 @@
 {
   "name": "searchkit-redux",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "A suite of react components to help create a UI quickly for elasticsearch with Redux integration",
   "main": "lib/src/index.js",
   "keywords": [
