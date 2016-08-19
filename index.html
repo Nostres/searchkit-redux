@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Searchkit-redux by udisun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Searchkit-redux</h1>
+      <h2 class="project-tagline">React UI components / widgets. The easiest way to build a great search experience with Elasticsearch.</h2>
+      <a href="https://github.com/udisun/searchkit-redux" class="btn">View on GitHub</a>
+      <a href="https://github.com/udisun/searchkit-redux/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/udisun/searchkit-redux/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="searchkit-redux" class="anchor" href="#searchkit-redux" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SearchKit-Redux</h2>
+
+<p>This is a forked Searckit@v0.10.0 with Redux and Immutable.js
+This version has some Redux capabilities and allows anyone to import a "SearchKitReducer" and in return add to your store's state tree the following structure:</p>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>viewSwitcher<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>currentView<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>table<span class="pl-pds">"</span></span>,
+  },
+  <span class="pl-s"><span class="pl-pds">"</span>items<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>displayed<span class="pl-pds">"</span></span>: [{}, {}, {}],
+    <span class="pl-s"><span class="pl-pds">"</span>query<span class="pl-pds">"</span></span>: {},
+  }
+}</pre></div>
+
+<h3>
+<a id="adding-the-searchkitreducer-to-your-store" class="anchor" href="#adding-the-searchkitreducer-to-your-store" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding the SearchKitReducer to your store</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> { <span class="pl-smi">combineReducers</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>redux-immutable<span class="pl-pds">'</span></span>
+<span class="pl-k">import</span> <span class="pl-v">*</span> <span class="pl-k">as</span> <span class="pl-smi">SearchKit</span> <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>searchkit<span class="pl-pds">'</span></span> <span class="pl-c">// eslint-disable-line</span>
+
+<span class="pl-k">const</span> <span class="pl-c1">YourReducer</span> <span class="pl-k">=</span> <span class="pl-en">combineReducers</span>({
+  filter<span class="pl-k">:</span> SearchKitReducer,
+  <span class="pl-en">more</span><span class="pl-k">:</span> () <span class="pl-k">=&gt;</span> {},
+})
+
+<span class="pl-k">export</span> <span class="pl-v">default</span> <span class="pl-smi">YourReducer</span>
+</pre></div>
+
+<h3>
+<a id="using-the-viewswitcher-with-redux-mappings" class="anchor" href="#using-the-viewswitcher-with-redux-mappings" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using the ViewSwitcher with Redux mappings</h3>
+
+<p>Just import ViewSwitcherToggleContainer instead of ViewSwitcherToggle</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">import</span> { <span class="pl-smi">ViewSwitcherToggleContainer</span> } <span class="pl-k">from</span> <span class="pl-s"><span class="pl-pds">'</span>searchkit<span class="pl-pds">'</span></span></pre></div>
+
+<h2>
+<a id="breaking-changes" class="anchor" href="#breaking-changes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Breaking Changes</h2>
+
+<p>From now on when you use the property 'highlightFields'
+instead of passing an Array of Strings:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">&lt;</span>Hits            
+  highlightFields<span class="pl-k">=</span>{[<span class="pl-s"><span class="pl-pds">'</span>title<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>body<span class="pl-pds">'</span></span>]}
+<span class="pl-k">&gt;</span></pre></div>
+
+<p>you will have to pass an Array of Objects, exactly like elasticsearch likes it.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">&lt;</span>Hits            
+  highlightFields<span class="pl-k">=</span>{{
+    fields<span class="pl-k">:</span> {
+      <span class="pl-s"><span class="pl-pds">'</span>title<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
+        number_of_fragments<span class="pl-k">:</span> <span class="pl-c1">0</span>,
+      },
+      <span class="pl-s"><span class="pl-pds">'</span>result.domain<span class="pl-pds">'</span></span><span class="pl-k">:</span> {
+        number_of_fragments<span class="pl-k">:</span> <span class="pl-c1">0</span>,
+      },
+    },
+  }}
+<span class="pl-k">&gt;</span></pre></div>
+
+<p>This will allow you to pass highlighting options per field.</p>
+
+<h2>
+<a id="what-is-searchkit" class="anchor" href="#what-is-searchkit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is Searchkit?</h2>
+
+<p>Searchkit is a suite of UI components built in react. The aim is to rapidly create beautiful search applications using declarative components, and without being an ElasticSearch expert.</p>
+
+<p><img src="./docs/assets/codepreview.png"></p>
+
+<p><a href="https://circleci.com/gh/searchkit/searchkit"><img src="https://circleci.com/gh/searchkit/searchkit.png?style=shield"></a>
+<a href="https://badge.fury.io/js/searchkit"><img src="https://badge.fury.io/js/searchkit.svg" alt="npm version"></a>
+<a href="https://gitter.im/searchkit/searchkit?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/searchkit/searchkit.svg" alt="Join the chat at https://gitter.im/searchkit/searchkit"></a>
+<a href="https://coveralls.io/github/searchkit/searchkit?branch=develop"><img src="https://coveralls.io/repos/searchkit/searchkit/badge.svg?branch=develop&amp;service=github" alt="Coverage Status"></a></p>
+
+<p>See full <a href="http://docs.searchkit.co/stable">Documentation</a> or <a href="http://docs.searchkit.co/stable/docs/setup/project-setup.html">Getting Started</a></p>
+
+<h2>
+<a id="quick-intro" class="anchor" href="#quick-intro" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Intro</h2>
+
+<p><a href="http://demo.searchkit.co">Live demo</a></p>
+
+<div class="highlight highlight-source-js-jsx"><pre><span class="pl-k">const</span> <span class="pl-smi">searchkit</span><span class="pl-k"> =</span> <span class="pl-k">new</span> <span class="pl-en">SearchkitManager</span>(<span class="pl-s"><span class="pl-pds">"</span>http://demo.searchkit.co/api/movies/<span class="pl-pds">"</span></span>)
+
+
+<span class="pl-k">const</span> <span class="pl-smi">App</span><span class="pl-k"> =</span> ()<span class="pl-k">=&gt;</span> (
+  &lt;<span class="pl-ent"><span class="pl-c1">SearchkitProvider</span></span> <span class="pl-e">searchkit</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-smi">searchkit</span></span><span class="pl-pse">}</span>&gt;
+    &lt;<span class="pl-ent"><span class="pl-c1">Layout</span></span>&gt;
+      &lt;<span class="pl-ent"><span class="pl-c1">TopBar</span></span>&gt;
+        &lt;<span class="pl-ent"><span class="pl-c1">SearchBox</span></span>
+          <span class="pl-e">autofocus</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-c1">true</span></span><span class="pl-pse">}</span>
+          <span class="pl-e">searchOnChange</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-c1">true</span></span><span class="pl-pse">}</span>
+          <span class="pl-e">prefixQueryFields</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1">[<span class="pl-s"><span class="pl-pds">"</span>actors^1<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>type^2<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>languages<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>title^10<span class="pl-pds">"</span></span>]</span><span class="pl-pse">}</span>/&gt;
+      &lt;/<span class="pl-ent"><span class="pl-c1">TopBar</span></span>&gt;
+      &lt;<span class="pl-ent"><span class="pl-c1">LayoutBody</span></span>&gt;
+        &lt;<span class="pl-ent"><span class="pl-c1">SideBar</span></span>&gt;
+          &lt;<span class="pl-ent"><span class="pl-c1">HierarchicalMenuFilter</span></span>
+            <span class="pl-e">fields</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1">[<span class="pl-s"><span class="pl-pds">"</span>type.raw<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>genres.raw<span class="pl-pds">"</span></span>]</span><span class="pl-pse">}</span>
+            <span class="pl-e">title</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Categories<span class="pl-pds">"</span></span>
+            <span class="pl-e">id</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>categories<span class="pl-pds">"</span></span>/&gt;
+          &lt;<span class="pl-ent"><span class="pl-c1">RefinementListFilter</span></span>
+            <span class="pl-e">id</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>actors<span class="pl-pds">"</span></span>
+            <span class="pl-e">title</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>Actors<span class="pl-pds">"</span></span>
+            <span class="pl-e">field</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>actors.raw<span class="pl-pds">"</span></span>
+            <span class="pl-e">operator</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>AND<span class="pl-pds">"</span></span>
+            <span class="pl-e">size</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-c1">10</span></span><span class="pl-pse">}</span>/&gt;
+        &lt;/<span class="pl-ent"><span class="pl-c1">SideBar</span></span>&gt;
+        &lt;<span class="pl-ent"><span class="pl-c1">LayoutResults</span></span>&gt;
+          &lt;<span class="pl-ent"><span class="pl-c1">ActionBar</span></span>&gt;
+
+            &lt;<span class="pl-ent"><span class="pl-c1">ActionBarRow</span></span>&gt;
+              &lt;<span class="pl-ent"><span class="pl-c1">HitsStats</span></span>/&gt;
+            &lt;/<span class="pl-ent"><span class="pl-c1">ActionBarRow</span></span>&gt;
+
+            &lt;<span class="pl-ent"><span class="pl-c1">ActionBarRow</span></span>&gt;
+              &lt;<span class="pl-ent"><span class="pl-c1">SelectedFilters</span></span>/&gt;
+              &lt;<span class="pl-ent"><span class="pl-c1">ResetFilters</span></span>/&gt;
+            &lt;/<span class="pl-ent"><span class="pl-c1">ActionBarRow</span></span>&gt;
+
+          &lt;/<span class="pl-ent"><span class="pl-c1">ActionBar</span></span>&gt;
+          &lt;<span class="pl-ent"><span class="pl-c1">Hits</span></span> <span class="pl-e">mod</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>sk-hits-grid<span class="pl-pds">"</span></span> <span class="pl-e">hitsPerPage</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-c1">10</span></span><span class="pl-pse">}</span> <span class="pl-e">itemComponent</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1"><span class="pl-smi">MovieHitsGridItem</span></span><span class="pl-pse">}</span>
+            <span class="pl-e">sourceFilter</span><span class="pl-k">=</span><span class="pl-pse">{</span><span class="pl-s1">[<span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>poster<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>imdbId<span class="pl-pds">"</span></span>]</span><span class="pl-pse">}</span>/&gt;
+          &lt;<span class="pl-ent"><span class="pl-c1">NoHits</span></span>/&gt;
+        &lt;/<span class="pl-ent"><span class="pl-c1">LayoutResults</span></span>&gt;
+      &lt;/<span class="pl-ent"><span class="pl-c1">LayoutBody</span></span>&gt;
+    &lt;/<span class="pl-ent"><span class="pl-c1">Layout</span></span>&gt;
+  &lt;/<span class="pl-ent"><span class="pl-c1">SearchkitProvider</span></span>&gt;
+)
+
+<span class="pl-smi">ReactDOM</span><span class="pl-k">.</span><span class="pl-en">render</span>(&lt;<span class="pl-ent"><span class="pl-c1">App</span></span>/&gt;,<span class="pl-c1"> document</span><span class="pl-k">.</span><span class="pl-en">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>root<span class="pl-pds">'</span></span>))
+
+</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/udisun/searchkit-redux">Searchkit-redux</a> is maintained by <a href="https://github.com/udisun">udisun</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
