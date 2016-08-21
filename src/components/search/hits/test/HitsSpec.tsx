@@ -18,7 +18,11 @@ describe("Hits component", () => {
       this.wrapper = mount(
         <Hits searchkit={this.searchkit}
               hitsPerPage={10}
-              highlightFields={["title"]}
+              highlightOptions={{
+                fields: {
+                  "title": {},
+                },
+              }}
               sourceFilter={["title"]}/>
       )
 
@@ -34,7 +38,7 @@ describe("Hits component", () => {
 
     it("initalize accessors correctly", ()=> {
       expect(this.pageSizeAccessor.defaultSize).toBe(10)
-      expect(this.highlightAccessor.highlightFields)
+      expect(this.highlightAccessor.highlightOptions)
         .toEqual({
            fields: { title:{}}
         })

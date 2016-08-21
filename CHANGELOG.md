@@ -1,3 +1,7 @@
+## 0.11.0 (21th August, 2016)
+-- changed the name of the accessor 'highlightFields' to 'highlightOptions'
+-- fixed the type of the prop 'highlightOptions' to be Object instead of Array
+
 ## 0.10.2 (16th August, 2016)
 -- updated the README.md to fix a wrong json structure
 

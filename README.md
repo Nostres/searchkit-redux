@@ -35,12 +35,13 @@ import { ViewSwitcherToggleContainer } from 'searchkit'
 ```
 
 ## Breaking Changes
-From now on when you use the property 'highlightFields'
+'highlightFields' has changed to be 'highlightOptions'
+The structure of the prop has also changed and from now on
 instead of passing an Array of Strings:
 
 ```javascript
 <Hits            
-  highlightFields={['title', 'body']}
+  highlightOptions={['title', 'body']}
 >
 ```
 
@@ -48,7 +49,7 @@ you will have to pass an Array of Objects, exactly like elasticsearch likes it.
 
 ```javascript
 <Hits            
-  highlightFields={{
+  highlightOptions={{
     fields: {
       'title': {
         number_of_fragments: 0,
