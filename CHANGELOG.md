@@ -1,3 +1,14 @@
+## 0.11.0 (21th August, 2016)
+-- changed the name of the accessor 'highlightFields' to 'highlightOptions'
+-- fixed the type of the prop 'highlightOptions' to be Object instead of Array
+
+## 0.10.2 (16th August, 2016)
+-- updated the README.md to fix a wrong json structure
+
+## 0.10.1 (16th August, 2016)
+- reverted to the previous 'qs' package version
+- added ability to have highlighted fields options
+
 ## 0.10.0 (4th June, 2016)
 - `SearchkitManager` is more intelligent with reregistering url listeners
 - `RefinementListFilter`, `MenuFilter`, `NumericRefinementListFilter` and `RangeFilter` now supports `fieldOptions` for `nested`/`child` fields

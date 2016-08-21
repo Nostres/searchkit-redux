@@ -11,7 +11,7 @@ import {
 } from "../../../core"
 
 import {
-	Hits, HitsProps, HitItemProps, HitsListProps
+	Hits, HitsProps, HitItemProps, HitsListProps, HitsContainer,
 } from "../../"
 
 export interface ViewSwitcherHitsProps extends HitsProps {
@@ -20,7 +20,7 @@ export interface ViewSwitcherHitsProps extends HitsProps {
 		title:string,
 		itemComponent?:RenderComponentType<HitItemProps>,
 		listComponent?:RenderComponentType<HitsListProps>,
-		defaultOption?:boolean
+		defaultOption?:boolean,
 	}]
 }
 
@@ -54,7 +54,7 @@ export class ViewSwitcherHits extends SearchkitComponent<ViewSwitcherHitsProps, 
 		props.listComponent = selectedOption.listComponent
     props.mod = 'sk-hits-'+selectedOption.key
     return (
-      <Hits {...props} />
+      <HitsContainer {...props} />
     )
   }
 }

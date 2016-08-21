@@ -24,5 +24,8 @@
     "selenium-webdriver": "github:joemcelroy/DefinitelyTyped/selenium-webdriver/selenium-webdriver.d.ts#0d64ea1b82ad1d804892ceec14d98a9be85f64fb",
     "sinon": "github:joemcelroy/DefinitelyTyped/sinon/sinon.d.ts#d1f6bde13f2209be42e86c3686761e8bfcbb50a5",
     "typescript": "github:joemcelroy/DefinitelyTyped/typescript/typescript.d.ts#68548c2daab053869f323d475419c693478bbb73"
+  },
+  "dependencies": {
+    "redux-immutable": "registry:npm/redux-immutable#3.0.6+20160310030142"
   }
 }

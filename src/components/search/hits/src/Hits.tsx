@@ -83,11 +83,13 @@ export class HitsList extends React.Component<HitsListProps, any>{
 
 export interface HitsProps extends SearchkitComponentProps{
 	hitsPerPage: number
-	highlightFields?:Array<string>
+	highlightOptions?:Object
 	sourceFilter?:SourceFilterType
 	itemComponent?:ReactComponentType<HitItemProps>
 	listComponent?:ReactComponentType<HitsListProps>
 	scrollTo?: boolean|string
+  updateDisplayed?: Function
+  updateQuery?: Function
 }
 
 
@@ -96,16 +98,14 @@ export class Hits extends SearchkitComponent<HitsProps, any> {
 
 	static propTypes = defaults({
 		hitsPerPage:React.PropTypes.number.isRequired,
-		highlightFields:React.PropTypes.arrayOf(
-			React.PropTypes.string
-		),
+		highlightOptions:React.PropTypes.object,
 		sourceFilterType:React.PropTypes.oneOf([
 			React.PropTypes.string,
 			React.PropTypes.arrayOf(React.PropTypes.string),
 			React.PropTypes.bool
 		]),
 		itemComponent:RenderComponentPropType,
-		listComponent:RenderComponentPropType
+		listComponent:RenderComponentPropType,
 	}, SearchkitComponent.propTypes)
 
 	static defaultProps = {
@@ -115,9 +115,9 @@ export class Hits extends SearchkitComponent<HitsProps, any> {
 
 	componentWillMount() {
 		super.componentWillMount()
-		if(this.props.highlightFields) {
+		if(this.props.highlightOptions) {
 			this.searchkit.addAccessor(
-				new HighlightAccessor(this.props.highlightFields))
+				new HighlightAccessor(this.props.highlightOptions))
 		}
 		if(this.props.sourceFilter){
 			this.searchkit.addAccessor(
@@ -134,6 +134,10 @@ export class Hits extends SearchkitComponent<HitsProps, any> {
 
 	render() {
 		let hits:Array<Object> = this.getHits()
+
+    this.props.updateDisplayed(hits)
+    this.props.updateQuery(this.searchkit.query)
+
 		let hasHits = hits.length > 0
 
 		if (!this.isInitialLoading() && hasHits) {

@@ -1,12 +1,14 @@
 {
-  "name": "searchkit",
-  "version": "0.10.0",
-  "description": "A suite of react components to help create a UI quickly for elasticsearch ",
+  "name": "searchkit-redux",
+  "version": "0.10.2",
+  "description": "A suite of react components to help create a UI quickly for elasticsearch with Redux integration",
   "main": "lib/src/index.js",
   "keywords": [
     "elasticsearch",
     "elastic search",
     "react",
+    "redux",
+    "immutable.js",
     "ui components",
     "search",
     "library",
@@ -17,11 +19,11 @@
   ],
   "homepage": "http://www.searchkit.co",
   "bugs": {
-    "url": "https://github.com/searchkit/searchkit/issues"
+    "url": "https://github.com/udisun/searchkit-redux/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/searchkit/searchkit.git"
+    "url": "https://github.com/udisun/searchkit-redux.git"
   },
   "typings": "lib/src/index.d.ts",
   "scripts": {
@@ -48,6 +50,10 @@
     {
       "name": "Gregory Potdevin",
       "email": "gregory.potdevin@gmail.com"
+    },
+    {
+      "name": "Ehud Shahak",
+      "email": "udisun@gmail.com"
     }
   ],
   "license": "Apache-2.0",
@@ -56,11 +62,15 @@
     "bem-cn": "^1.2.2",
     "es6-promise": "^3.1.2",
     "history": "^2.1.1",
+    "immutable": "^3.8.1",
     "lodash": "^4.6.1",
     "qs": "ssetem/qs",
     "rc-slider": "^3.3.2",
     "react": "^0.14.7",
-    "react-addons-update": "^0.14.7"
+    "react-addons-update": "^0.14.7",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-immutable": "^3.0.6"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",

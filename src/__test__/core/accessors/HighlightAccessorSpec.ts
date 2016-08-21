@@ -10,11 +10,13 @@ describe("", ()=> {
     ])
   })
 
-  it("constructor(), computeHighlightedFields()", ()=> {
-    expect(this.accessor.highlightFields).toEqual({
-      fields: {
-        title:{},
-        content: {}
+  it("constructor(), computeHighlightedOptions()", ()=> {
+    expect(this.accessor.highlightOptions).toEqual({
+      options: {
+        fields: {
+          title: {},
+          content: {}
+        }
       }
     })
   })

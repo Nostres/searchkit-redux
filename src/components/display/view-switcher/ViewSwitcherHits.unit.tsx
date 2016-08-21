@@ -55,7 +55,11 @@ describe("View Switcher Hits component", () => {
               {key:"list", title:"List", itemComponent:MovieHitsListItem},
               {key:"custom-list", title:"Custom List", listComponent:MovieList}
             ]}
-            highlightFields={["title"]}
+            highlightOptions={{
+              fields: {
+                'title': {},
+              },
+            }}
             hitsPerPage={12}
             sourceFilter={["title"]}/>
             <ViewSwitcherToggle searchkit={this.searchkit} translations={{"Grid":"My Grid"}} {...props}/>

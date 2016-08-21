@@ -1,3 +1,69 @@
+## SearchKit-Redux
+This is a forked Searckit@v0.10.0 with Redux and Immutable.js
+This version has some Redux capabilities and allows anyone to import a "SearchKitReducer" and in return add to your store's state tree the following structure:
+```json
+{
+  "viewSwitcher": {
+    "currentView": "table",
+  },
+  "items": {
+    "displayed": [{}, {}, {}],
+    "query": {},
+  }
+}
+```
+
+### Adding the SearchKitReducer to your store
+```javascript
+import { combineReducers } from 'redux-immutable'
+import * as SearchKit from 'searchkit' // eslint-disable-line
+
+const YourReducer = combineReducers({
+  filter: SearchKitReducer,
+  more: () => {},
+})
+
+export default YourReducer
+
+```
+
+### Using the ViewSwitcher with Redux mappings
+Just import ViewSwitcherToggleContainer instead of ViewSwitcherToggle
+
+```javascript
+import { ViewSwitcherToggleContainer } from 'searchkit'
+```
+
+## Breaking Changes
+'highlightFields' has changed to be 'highlightOptions'
+The structure of the prop has also changed and from now on
+instead of passing an Array of Strings:
+
+```javascript
+<Hits            
+  highlightOptions={['title', 'body']}
+>
+```
+
+you will have to pass an Array of Objects, exactly like elasticsearch likes it.
+
+```javascript
+<Hits            
+  highlightOptions={{
+    fields: {
+      'title': {
+        number_of_fragments: 0,
+      },
+      'result.domain': {
+        number_of_fragments: 0,
+      },
+    },
+  }}
+>
+```
+
+This will allow you to pass highlighting options per field.
+
 ## What is Searchkit?
 Searchkit is a suite of UI components built in react. The aim is to rapidly create beautiful search applications using declarative components, and without being an ElasticSearch expert.
 
