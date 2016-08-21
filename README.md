@@ -19,7 +19,7 @@ import { combineReducers } from 'redux-immutable'
 import * as SearchKit from 'searchkit' // eslint-disable-line
 
 const YourReducer = combineReducers({
-  filter: SearchKitReducer,
+  filter: SearchKit.SearchKitReducer,
   more: () => {},
 })
 
